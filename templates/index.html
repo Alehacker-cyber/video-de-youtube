@@ -2,26 +2,63 @@
 <html>
 <head>
     <title>¡Sorpresa auditiva! 🔊</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: sans-serif;
+            background-color: #fefefe;
+        }
+
+        #main-content {
+            margin-top: 100px;
+        }
+
+        #surprise-image {
+            display: none;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #ff85c1;
+        }
+    </style>
 </head>
 <body>
-    <h1>envíaselo a ese amigo que tanto amas 😌</h1>
+    <div id="main-content">
+        <h1>envíaselo a ese amigo que tanto amas 😌</h1>
+        <button onclick="triggerSurprise()">Haz clic para escuchar 💖</button>
+    </div>
 
-    <button onclick="playAudios()">Haz clic para escuchar 💖</button>
+    <div id="surprise-image">
+        <h1>¡Caíste! 😂</h1>
+        <img src="{{ url_for('static', filename='caiste.jpg') }}" alt="Caíste" width="400">
+    </div>
 
     <audio id="audio1">
         <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.11 PM.mpeg') }}" type="audio/mpeg">
-        Tu navegador no soporta audio.
     </audio>
 
     <audio id="audio2">
         <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.06 PM.mpeg') }}" type="audio/mpeg">
-        Tu navegador no soporta audio.
     </audio>
 
     <script>
-        function playAudios() {
+        function triggerSurprise() {
             document.getElementById('audio1').play();
             document.getElementById('audio2').play();
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('surprise-image').style.display = 'block';
         }
     </script>
 </body>
