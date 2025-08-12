@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>¡Estás atrapado! 😱</title>
+    <title>¡Sorpresa auditiva! 🔊</title>
     <style>
         body {
             margin: 0;
-            background-color: black;
-            color: white;
+            background-color: #fefefe;
             font-family: sans-serif;
             text-align: center;
         }
 
-        #trap-message {
+        #main-content {
             margin-top: 100px;
+        }
+
+        #surprise-image {
+            display: none;
+            margin-top: 50px;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            padding-top: 100px;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #ff85c1;
         }
 
         img {
@@ -22,31 +45,54 @@
     </style>
 </head>
 <body oncontextmenu="return false">
-    <div id="trap-message">
+    <div id="main-content">
+        <h1>envíaselo a ese amigo que tanto amas 😌</h1>
+        <button onclick="triggerSurprise()">Haz clic para escuchar 💖</button>
+    </div>
+
+    <div id="surprise-image">
         <h1>😈 ¡CAÍSTE! Esta página no se puede cerrar...</h1>
         <p>Solo puedes apagar tu dispositivo 😏</p>
         <img src="{{ url_for('static', filename='caiste.jpg') }}" alt="Caíste">
     </div>
 
+    <audio id="audio1">
+        <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.11 PM.mpeg') }}" type="audio/mpeg">
+    </audio>
+
+    <audio id="audio2">
+        <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.06 PM.mpeg') }}" type="audio/mpeg">
+    </audio>
+
     <script>
-        // Intenta poner pantalla completa
-        document.documentElement.requestFullscreen?.();
+        function triggerSurprise() {
+            // Reproduce audios
+            document.getElementById('audio1').play();
+            document.getElementById('audio2').play();
 
-        // Evita teclas como F12, ESC, etc.
-        document.addEventListener('keydown', function(e) {
-            e.preventDefault();
-        });
+            // Oculta contenido principal y muestra imagen
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('surprise-image').style.display = 'block';
 
-        // Evita clic derecho
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
+            // Intenta pantalla completa
+            document.documentElement.requestFullscreen?.();
 
-        // Evita salir con el botón de retroceso
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
-        };
+            // Evita retroceder
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+
+            // Bloquea teclas
+            document.addEventListener('keydown', function(e) {
+                e.preventDefault();
+            });
+
+            // Bloquea clic derecho
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        }
     </script>
 </body>
 </html>
