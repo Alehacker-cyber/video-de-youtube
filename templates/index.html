@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>¡Sorpresa auditiva! 🔊</title>
+    <title>¡Estás atrapado! 😱</title>
     <style>
         body {
-            text-align: center;
+            margin: 0;
+            background-color: black;
+            color: white;
             font-family: sans-serif;
-            background-color: #fefefe;
+            text-align: center;
         }
 
-        #main-content {
+        #trap-message {
             margin-top: 100px;
         }
 
-        #surprise-image {
-            display: none;
-            margin-top: 50px;
-        }
-
-        button {
-            padding: 20px 40px;
-            font-size: 24px;
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        button:hover {
-            background-color: #ff85c1;
+        img {
+            margin-top: 30px;
+            width: 400px;
         }
     </style>
 </head>
-<body>
-    <div id="main-content">
-        <h1>envíaselo a ese amigo que tanto amas 😌</h1>
-        <button onclick="triggerSurprise()">Haz clic para escuchar 💖</button>
+<body oncontextmenu="return false">
+    <div id="trap-message">
+        <h1>😈 ¡CAÍSTE! Esta página no se puede cerrar...</h1>
+        <p>Solo puedes apagar tu dispositivo 😏</p>
+        <img src="{{ url_for('static', filename='caiste.jpg') }}" alt="Caíste">
     </div>
-
-    <div id="surprise-image">
-        <h1>¡Caíste! 😂</h1>
-        <img src="{{ url_for('static', filename='caiste.jpg') }}" alt="Caíste" width="400">
-    </div>
-
-    <audio id="audio1">
-        <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.11 PM.mpeg') }}" type="audio/mpeg">
-    </audio>
-
-    <audio id="audio2">
-        <source src="{{ url_for('static', filename='WhatsApp Audio 2025-08-11 at 10.35.06 PM.mpeg') }}" type="audio/mpeg">
-    </audio>
 
     <script>
-        function triggerSurprise() {
-            document.getElementById('audio1').play();
-            document.getElementById('audio2').play();
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('surprise-image').style.display = 'block';
-        }
+        // Intenta poner pantalla completa
+        document.documentElement.requestFullscreen?.();
+
+        // Evita teclas como F12, ESC, etc.
+        document.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
+
+        // Evita clic derecho
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Evita salir con el botón de retroceso
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
     </script>
 </body>
 </html>
