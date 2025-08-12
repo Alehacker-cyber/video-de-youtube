@@ -52,7 +52,7 @@
 
     <div id="surprise-image">
         <h1>😈 ¡CAÍSTE! Esta página no se puede cerrar...</h1>
-        <p>Solo puedes apagar tu dispositivo 😏</p>
+        <p>Esta página está bloqueada. No puedes salir de ella.</p>
         <img src="{{ url_for('static', filename='caiste.jpg') }}" alt="Caíste">
     </div>
 
@@ -92,6 +92,11 @@
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
             });
+
+            // Activar bloqueo de salida
+            window.onbeforeunload = function() {
+                return "Esta página está bloqueada. No puedes salir.";
+            };
         }
     </script>
 </body>
