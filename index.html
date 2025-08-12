@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control de Volumen</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #111;
+      color: #eee;
+      margin-top: 50px;
+    }
+    button {
+      font-size: 20px;
+      padding: 15px 30px;
+      margin: 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #caida {
+      display: none;
+      font-size: 50px;
+      color: #ff4444;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Control de Volumen</h1>
+  <p>Usa los botones para ajustar el volumen</p>
+
+  <!-- Botones invertidos -->
+  <button onclick="bajarVolumen()">🔊 Subir Volumen</button>
+  <button onclick="subirVolumen()">🔉 Bajar Volumen</button>
+
+  <!-- Audio -->
+  <audio id="audio" src="/static/audio.mp3"></audio>
+
+  <!-- Cartel final -->
+  <div id="caida">¡Caíste! 🤓</div>
+
+  <script>
+    const audio = document.getElementById("audio");
+
+    function subirVolumen() {
+      audio.volume = Math.min(audio.volume + 0.1, 1);
+      audio.play();
+    }
+
+    function bajarVolumen() {
+      audio.volume = Math.max(audio.volume - 0.1, 0);
+      audio.play();
+    }
+
+    // Temporizador de 10 minutos (600,000 ms)
+    setTimeout(() => {
+      document.body.innerHTML = ""; // Limpia la pantalla
+      const cartel = document.createElement("div");
+      cartel.innerText = "¡Caíste! 🤓";
+      cartel.style.fontSize = "60px";
+      cartel.style.color = "#ff4444";
+      cartel.style.textAlign = "center";
+      cartel.style.marginTop = "200px";
+      document.body.appendChild(cartel);
+    }, 600000); // 10 minutos
+  </script>
+</body>
+</html>
